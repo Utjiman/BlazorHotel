@@ -1,0 +1,26 @@
+@using BlazorHotel.Components;
+@page "/bookings"
+@inject Service Service;
+
+
+
+<h1>Bookings</h1>
+
+@foreach (var booking in BookingsList)
+{
+    <p>@booking.BookingId</p>
+}
+<button @onclick="AddBooking">Add Booking</button>
+
+@code {
+   
+    public List<Bookings> BookingsList = new List<Bookings>();
+    //Service x = new Service();
+    
+        
+
+    private void AddBooking()
+    {
+        Bookings.AddBooking(Service.bookings, Service.rooms);
+    }
+} 
