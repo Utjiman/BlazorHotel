@@ -11,16 +11,43 @@
     <p>@booking.BookingId</p>
 }
 <button @onclick="AddBooking">Add Booking</button>
+<input placeholder = "textbox" @bind-value = "custIdTmp" />
 
 @code {
    
     public List<Bookings> BookingsList = new List<Bookings>();
-    //Service x = new Service();
-    
-        
-
+    private static string custIdTmp;
+    int custId = int.Parse(custIdTmp);
     private void AddBooking()
     {
         Bookings.AddBooking(Service.bookings, Service.rooms);
+        
+    }
+    public void Bookingss(List<Bookings>bookings, List<Room>rooms)
+    {
+        int bookId;
+        if (bookings.Count() < 1)
+        {
+            bookId=100;
+        }
+        else
+        {
+            bookId=bookings[bookings.Count() -1].BookingId +1;
+        }
+    List<Room> customerrooms = new List<Room>();
+    /*System.Console.WriteLine("Add customer");
+    int custId = int.Parse(""+ Console.ReadLine());
+    System.Console.WriteLine("Add first date");
+    DateOnly dateIn = DateOnly.Parse(""+ Console.ReadLine());
+    System.Console.WriteLine("Add last date");
+    DateOnly dateOut = DateOnly.Parse(""+ Console.ReadLine());
+    System.Console.Write("checked in (Yes/No) ?");
+    bool tempChecked = Console.ReadLine().ToLower().Equals("yes");
+    System.Console.WriteLine("Creditcard number");
+    string creditC = Console.ReadLine();
+
+
+    Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
+    bookings.Add(bookings1);*/
     }
 } 
