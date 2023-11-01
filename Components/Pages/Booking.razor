@@ -6,8 +6,10 @@
 
 <h1>Bookings</h1>
 <p>@InBooking()</p>
-@BookingMethods.PrintBooking(Service.bookings,Service.customers)
-
+<div>
+    @((MarkupString)BookingMethods.PrintBooking(Service.bookings,Service.customers))
+    
+</div>
 
 @foreach (var a in Service.bookings)
             {
