@@ -5,13 +5,31 @@
 
 
 <h1>Bookings</h1>
+<p>@InBooking()</p>
+@BookingMethods.PrintBooking(Service.bookings,Service.customers)
+
+
+@foreach (var a in Service.bookings)
+            {
+               
+                <ul>
+                    <li>@a.DateIn</li>
+                    <li>@a.Customerid</li>
+                    <li>@a.DateOut</li>
+                </ul>
+           
+            }
 
 @foreach (var booking in BookingsList)
 {
     <p>@booking.BookingId</p>
 }
+<p>Customer Id :</p><input @bind="@custIdTmp" />
 <button @onclick="AddBooking">Add Booking</button>
-<input @bind="@custIdTmp" />
+
+
+
+
 
 @code {
    
@@ -19,6 +37,19 @@
     private string? custIdTmp {get; set;}
     //int custId = int.Parse(custIdTmp+"");
     private void AddBooking()
+    {   string output ="";
+        if (int.TryParse(custIdTmp, out int custId))
+        {
+           
+            //Bookings.AddBooking(Service.bookings, Service.rooms);
+        }
+       
+        
+        
+    }
+    
+
+    public static string InBooking()
     {
         List<Room> customerRooms = new List<Room>();
         
@@ -31,14 +62,9 @@
         DateOnly date2 = new DateOnly (2001,01,05);
         Bookings booktest1 = new Bookings(100, date1, date2, 1, false, "20333541",customerRooms );
         Service.bookings.Add(booktest1);
-
-        if (int.TryParse(custIdTmp, out int custId))
-        {
-            Bookings.AddBooking(Service.bookings, Service.rooms);
-        }
-        
-        
+        return "";
     }
+
     public void Bookingss(List<Bookings>bookings, List<Room>rooms)
     {
         int bookId;
