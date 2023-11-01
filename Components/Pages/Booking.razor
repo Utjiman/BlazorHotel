@@ -34,9 +34,9 @@
 
         if (int.TryParse(custIdTmp, out int custId))
         {
-
+            Bookings.AddBooking(Service.bookings, Service.rooms);
         }
-        Bookings.AddBooking(Service.bookings, Service.rooms);
+        
         
     }
     public void Bookingss(List<Bookings>bookings, List<Room>rooms)

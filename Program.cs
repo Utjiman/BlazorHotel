@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Include singelton service
+builder.Services.AddSingleton<Service>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,4 +30,4 @@ app.MapRazorComponents<App>()
 
 
 app.Run();
-builder.Services.AddSingleton<Service>();
+
