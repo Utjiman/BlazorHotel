@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using BlazorHotel.Components;
 public class Customer
 {
     public int customerid {set; get;}
@@ -21,4 +24,6 @@ public class Customer
         email = epost;
         phone = phonenr;
     }
+    public void blabla()
+    {}
 }

@@ -1,6 +1,6 @@
 @using BlazorHotel.Components;
 @page "/bookings"
-@inject Service Service;
+@inject Service service;
 
 
 
@@ -11,15 +11,31 @@
     <p>@booking.BookingId</p>
 }
 <button @onclick="AddBooking">Add Booking</button>
-<input placeholder = "textbox" @bind-value = "custIdTmp" />
+<input @bind="@custIdTmp" />
 
 @code {
    
     public List<Bookings> BookingsList = new List<Bookings>();
-    private static string custIdTmp;
-    int custId = int.Parse(custIdTmp);
+    private string? custIdTmp {get; set;}
+    //int custId = int.Parse(custIdTmp+"");
     private void AddBooking()
     {
+        List<Room> customerRooms = new List<Room>();
+        
+        Customer mycust = new Customer(1, "Anders","Andersson", "19700304-1345","Storgatan 42, 43431 Kungsbacka","anders@hotmail.com","034-121121");
+        Service.customers.Add(mycust);
+        Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
+        Service.rooms.Add(room);
+        customerRooms.Add(room);
+        DateOnly date1 = new DateOnly (2001,01,01);
+        DateOnly date2 = new DateOnly (2001,01,05);
+        Bookings booktest1 = new Bookings(100, date1, date2, 1, false, "20333541",customerRooms );
+        Service.bookings.Add(booktest1);
+
+        if (int.TryParse(custIdTmp, out int custId))
+        {
+
+        }
         Bookings.AddBooking(Service.bookings, Service.rooms);
         
     }

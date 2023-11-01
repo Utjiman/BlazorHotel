@@ -25,6 +25,7 @@ app.UseAntiforgery();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-builder.Services.AddSingleton<Service>();
+
 
 app.Run();
+builder.Services.AddSingleton<Service>();
