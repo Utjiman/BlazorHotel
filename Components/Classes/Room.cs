@@ -10,6 +10,15 @@ public class Room
      public bool SilentRoom {set; get;}
      public bool FamilyRoom {set; get;}
      public Diffbeds Diffbeds {set; get;}
+     public Room(int roomNr)
+     {
+        RoomNr = roomNr;
+        NrOfBeds = 0;
+        Hcp = false;
+        SilentRoom = false;
+        FamilyRoom = false; 
+        Diffbeds = Diffbeds.Single;
+     }
 
      public Room (int roomNr, int nrOfBeds, bool hcp, bool silentRoom, bool familyRoom, Diffbeds diffbeds)
      {

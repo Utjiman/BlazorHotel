@@ -10,9 +10,16 @@ public class Customer
     public string adress {set; get;}
     public string email {set; get;}    
     public string phone {set; get;} 
-
-    
-
+    public Customer()
+    {
+        customerid = 0; 
+        forename = "";
+        lastname = "";
+        socialId = "";
+        adress = "";
+        email = "";
+        phone = "";
+    }
 
     public Customer(int cId, string fname, string lname, string sId, string adr, string epost, string phonenr)
     {

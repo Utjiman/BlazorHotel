@@ -1,5 +1,5 @@
 using BlazorHotel.Components;
-class Service
+public class Service
 {
     
     public static List<Bookings> bookings {get; set;} = new List<Bookings>();

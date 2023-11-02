@@ -1,17 +1,18 @@
-@using BlazorHotel.Components;
+@using BlazorHotel.Components
 @page "/bookings"
-@inject Service service;
+@inject Service service
+@inject BookingMethods bookingmethods
 
 
 
 <h1>Bookings</h1>
-<p>@InBooking()</p>
-<div>
+<!--<p>@InBooking()</p>-->
+<!--<div>
     @((MarkupString)BookingMethods.PrintBooking(Service.bookings,Service.customers))
     
-</div>
+</div>-->
 
-@foreach (var a in Service.bookings)
+<!--<div>@foreach (var a in Service.bookings)
             {
                
                 <ul>
@@ -20,24 +21,111 @@
                     <li>@a.DateOut</li>
                 </ul>
            
-            }
+            }-->
 
 @foreach (var booking in BookingsList)
 {
     <p>@booking.BookingId</p>
 }
-<p>Customer Id :</p><input @bind="@custIdTmp" />
-<button @onclick="AddBooking">Add Booking</button>
+<div>
+    <label for="customerid" >Customer ID:</label>
+    <input @bind="custIdTmp" />
+    <button @onclick="AddBooking">Add Booking</button>
+    <!--<p>@GenerateBookingId()</p>-->
+</div>
+<EditForm Model="@booking">
+  <div>
+    <label for="Booking ID" >Booking ID:</label>
+    <div class="form-group">
+    <label for="DateIn">Date to check in</label>
+    <InputDate @bind-Value=booking.DateIn class="form-control" id="DateIn" />
+  </div>
+  <div class="form-group">
+    <label for="DateOut">Date to check out</label>
+    <InputDate @bind-Value=booking.DateOut class="form-control" id="DateOut" />
+  </div>
+  <div class="form-group">
+    <label for="Checked in">Checked in</label>
+    <Input type="checkbox" checked="@IsChecked" @onchange="CheckboxChanged">
+  </div>
+   <div class="form-group">
+    <label for="Creditcard">Date to check out</label>
+    <InputText @bind-Value=creditcard class="form-control" id="DateOut" />
+  </div>
+  </div>
+  
+  @aroom = @BookingMethods.FindAvailableRooms(Service.rooms, Service.bookings, booking.DateIn, booking.DateOut);
+  <div>
+    @foreach (Room b in aroom)
+            {
+               
+                <ul>
+                    <li>@b.NrOfBeds</li>
+                    
+                </ul>
+           
+            }
+    </div>
+</EditForm> 
 
 
 
 
 
 @code {
-   
+    BookingMethods bookingm = new BookingMethods();
+    List<Room> aroom = new List<Room>();
+    
+    string creditcard;
+    public bool IsChecked { get; set; } = true;
+    /*public void FindAvailableRooms(List<Room>roomlist, List<Bookings>bookings)
+    {
+      aroom = FindAvailableRooms(Service.rooms, Service.bookings, booking.DateIn, booking.DateOut);
+    }*/
+    private void CheckboxChanged()
+      {
+           Console.WriteLine($"Checkbox changed {IsChecked}");
+      }
+   Bookings booking = new Bookings();
     public List<Bookings> BookingsList = new List<Bookings>();
     private string? custIdTmp {get; set;}
-    //int custId = int.Parse(custIdTmp+"");
+    
+    public int GenerateBookingId()
+    {
+        int bookId;
+        if (Service.bookings.Count() < 1)
+        {
+            bookId=100;
+        }
+        else
+        {
+            bookId=Service.bookings[Service.bookings.Count() -1].BookingId +1;
+        }
+        return bookId;
+    }
+    /*public static List<Room> FindAvailableRooms(List<Room>rooms,List<Bookings>bookings, DateOnly CustIn, DateOnly CustOut)
+    {
+    List<Room> AvailableRooms = new List<Room>();
+    /*Console.WriteLine("State the in date");
+    DateOnly CustIn = DateOnly.Parse(""+ Console.ReadLine());
+    Console.WriteLine("State the out date");
+    DateOnly CustOut = DateOnly.Parse(""+ Console.ReadLine());
+    foreach (Room a in rooms)
+    {
+        //Console.Write($"|Room number: {a.RoomNr} | Number of beds: {a.NrOfBeds}|");
+        if(FindBooking(bookings, a.RoomNr, CustIn, CustOut)) // Check if the room is available during the specified dates
+        {
+            AvailableRooms.Add(a);
+            //Console.WriteLine(" Available!");
+        }
+        else
+        {
+            //Console.WriteLine(" Booked!");
+        }
+    } return AvailableRooms;
+    }*/
+
+
     private void AddBooking()
     {   string output ="";
         if (int.TryParse(custIdTmp, out int custId))
@@ -51,21 +139,21 @@
     }
     
 
-    public static string InBooking()
-    {
-        List<Room> customerRooms = new List<Room>();
+    //public static string InBooking()
+    //{
+        //List<Room> customerRooms = new List<Room>();
         
-        Customer mycust = new Customer(1, "Anders","Andersson", "19700304-1345","Storgatan 42, 43431 Kungsbacka","anders@hotmail.com","034-121121");
+        /*Customer mycust = new Customer(1, "Anders","Andersson", "19700304-1345","Storgatan 42, 43431 Kungsbacka","anders@hotmail.com","034-121121");
         Service.customers.Add(mycust);
         Room room = new Room(101, 2, false, true, true, Diffbeds.Kingsize);
         Service.rooms.Add(room);
         customerRooms.Add(room);
         DateOnly date1 = new DateOnly (2001,01,01);
         DateOnly date2 = new DateOnly (2001,01,05);
-        Bookings booktest1 = new Bookings(100, date1, date2, 1, false, "20333541",customerRooms );
+        Bookings booktest1 = new Bookings(/*100, date1, date2, 1, false, "20333541",customerRooms );
         Service.bookings.Add(booktest1);
-        return "";
-    }
+        return "";*/
+    //}
 
     public void Bookingss(List<Bookings>bookings, List<Room>rooms)
     {
@@ -94,4 +182,20 @@
     Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
     bookings.Add(bookings1);*/
     }
+    /*<div class="form-group">
+    <label for="DateIn">Date to check in</label>
+    <input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31" />
+  <div class="form-group">
+    <label for="DateOut">Date to check out</label>
+    <InputDate @bind-Value=booking.DateOut class="form-control" id="DateOut" />
+  </div>
+  <div class="form-group">
+    <label for="Checkedinout">Checked in ?</label>
+    <InputCheckbox @bind-Value=Bookings.CheckedInOut class="form-control" id="CheckedInOut" />
+  </div>
+  <div class="form-group">
+    <label for="DateOut">Credit Card Number</label>
+    <InputText @bind-Value=Bookings.CreditCardNr class="form-control" id="CreditCardNr" />
+  </div>
+  <input type="submit" class="btn btn-primary" value="Save"/>*/
 } 

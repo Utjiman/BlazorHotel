@@ -12,6 +12,17 @@ public class Bookings
     public List<Room> Bookedrooms { get; set; }
     public int Customerid { get; set; }
 
+    public Bookings()
+    {
+        BookingId = 0; // Set a default value for customerid
+        DateIn = DateOnly.MinValue;
+        DateOut = DateOnly.MaxValue;
+        CheckedInOut = false;
+        CreditCardNr= "";
+        Bookedrooms = null;
+        Customerid = 0;
+    }
+
     public Bookings(int bookingId, DateOnly dateIn, DateOnly dateOut, int customerid, bool checkedInOut, string creditCardNr, List<Room> bookedrooms)
     {
         BookingId = bookingId;
@@ -46,8 +57,8 @@ public class Bookings
     string creditC = Console.ReadLine();
 
 
-    Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
-    bookings.Add(bookings1);
+    //Bookings bookings1 = new Bookings(bookId, dateIn, dateOut, custId, tempChecked, creditC, customerrooms);
+    //bookings.Add(bookings1);
 
 
     
