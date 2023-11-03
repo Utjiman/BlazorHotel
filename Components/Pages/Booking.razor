@@ -33,40 +33,20 @@
     <button @onclick="AddBooking">Add Booking</button>
     <!--<p>@GenerateBookingId()</p>-->
 </div>
-<EditForm Model="@booking">
-  <div>
-    <label for="Booking ID" >Booking ID:</label>
-    <div class="form-group">
-    <label for="DateIn">Date to check in</label>
-    <InputDate @bind-Value=booking.DateIn class="form-control" id="DateIn" />
-  </div>
-  <div class="form-group">
-    <label for="DateOut">Date to check out</label>
-    <InputDate @bind-Value=booking.DateOut class="form-control" id="DateOut" />
-  </div>
-  <div class="form-group">
-    <label for="Checked in">Checked in</label>
-    <Input type="checkbox" checked="@IsChecked" @onchange="CheckboxChanged">
-  </div>
-   <div class="form-group">
-    <label for="Creditcard">Date to check out</label>
-    <InputText @bind-Value=creditcard class="form-control" id="DateOut" />
-  </div>
-  </div>
+
   
   @aroom = @BookingMethods.FindAvailableRooms(Service.rooms, Service.bookings, booking.DateIn, booking.DateOut);
-  <div>
+
     @foreach (Room b in aroom)
             {
                
                 <ul>
-                    <li>@b.NrOfBeds</li>
+                    <li>@b</li>
                     
                 </ul>
            
             }
-    </div>
-</EditForm> 
+
 
 
 

@@ -117,19 +117,21 @@ class CustomerMethods
         }
     }  
 
-    static public void PrintCustomer(List<Customer> customers)
+    static public string PrintCustomer(List<Customer> customers)
     {
-        Console.WriteLine("------------------------------------------------");
-        Console.WriteLine("               Customers");
-        Console.WriteLine("------------------------------------------------");
+        String outhtml ="";
+        outhtml += "------------------------------------------------<br>";
+        outhtml += "               Customers<br>";
+        outhtml += "------------------------------------------------<br>";
         foreach( Customer a in customers)
         {
-            Console.Write($" Customer Id {a.customerid} \n");
-            Console.Write($" Customer name {a.forename} {a.lastname} \n");
-            Console.Write($" Customer adress {a.adress} \n");
-            Console.Write($" Customer phone {a.phone} \n");
-            Console.WriteLine($" Customer email: {a.email}");
-            Console.WriteLine("------------------------------------------------");
+            outhtml += $" Customer Id {a.customerid} <br>";
+            outhtml += $" Customer name {a.forename} {a.lastname} <br>";
+            outhtml += $" Customer adress {a.adress} <br>";
+            outhtml += $" Customer phone {a.phone} <br>";
+            outhtml += $" Customer email: {a.email} <br>";
+            outhtml += "------------------------------------------------<br>";
         }
+        return outhtml;
     }
 }
